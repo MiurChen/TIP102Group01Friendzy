@@ -147,7 +147,7 @@ fun Main() {
                     onClick = { password = "" } //跳轉畫面到忘記密碼頁
                 ) {
                     Text(
-                        text = "忘記密",
+                        text = "忘記密碼",
                         color = colorResource(R.color.Gray)
                     )
                 }
