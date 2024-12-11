@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">TIP102Group01Friendzy</string>
+    <string name="Account">帳號(信箱)</string>
+    <string name="Password">密碼</string>
+    <string name="SetUp">註冊</string>
+    <string name="LogIn">登入</string>
+    <string name="ForgotYourPassword">忘記密碼?</string>
+    <string name="acc_pass_empty">帳號和密碼不能為空!</string>
+</resources>

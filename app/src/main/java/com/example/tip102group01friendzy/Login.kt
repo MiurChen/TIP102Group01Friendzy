@@ -19,6 +19,8 @@ import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TextField
@@ -27,24 +29,31 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.colorResource
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.example.tip102group01friendzy.ui.theme.TIP102Group01FriendzyTheme
+import kotlinx.coroutines.launch
 
 @Composable
 fun Login() {
+    val context = LocalContext.current
     var account by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
+    val snackbarHostState = remember { SnackbarHostState() }
+    val scope = rememberCoroutineScope()
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -58,11 +67,11 @@ fun Login() {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp)
+                .padding(8.dp)
         ) {
             Image(
                 painter = painterResource(R.drawable.friendzy),
-                contentDescription = "image",
+                contentDescription = "friendzy",
                 modifier = Modifier
                     .size(150.dp)
                     .clip(CircleShape)
@@ -72,7 +81,7 @@ fun Login() {
             TextField(
                 value = account,
                 onValueChange = { account = it },
-                label = { Text(text = "Account(email)") },
+                label = { Text(text = stringResource(R.string.Account)) },
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = colorResource(R.color.teal_700),
@@ -86,7 +95,7 @@ fun Login() {
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text(text = "Password") },
+                label = { Text(text = stringResource(R.string.Password)) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Lock,
@@ -120,17 +129,38 @@ fun Login() {
             modifier = Modifier
                 .fillMaxWidth(0.8f)
         ) {
+
+            Button(
+                onClick = {
+                    if (account.isEmpty() || password.isEmpty()) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar(
+                                message = context.getString(R.string.acc_pass_empty),
+                                withDismissAction = true
+                            )
+                        }
+                    }
+                },//帳號密碼正確進入主畫面、帳號密碼錯誤不可登入
+                colors = ButtonDefaults.buttonColors(
+                    containerColor = colorResource(R.color.purple_200),
+                    contentColor = Color.DarkGray
+                )
+            ) {
+                Text(
+                    text = stringResource(R.string.LogIn)
+                )
+            }
             Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = Arrangement.Center,
+                verticalAlignment = Alignment.Bottom,
+                horizontalArrangement = Arrangement.End,
                 modifier = Modifier
-                    .fillMaxWidth(0.8f)
+                    .fillMaxWidth()
             ) {
                 TextButton(
                     onClick = { password = "" } //跳轉畫面到忘記密碼頁
                 ) {
                     Text(
-                        text = "忘記密碼",
+                        text = stringResource(R.string.ForgotYourPassword),
                         color = colorResource(R.color.Gray)
                     )
                 }
@@ -139,26 +169,18 @@ fun Login() {
                     onClick = { } //跳轉畫面到註冊
                 ) {
                     Text(
-                        text = "註冊",
+                        text = stringResource(R.string.SetUp),
                         color = colorResource(R.color.Gray)
                     )
                 }
-                Button(
-                    onClick = {},
-                    colors = ButtonDefaults.buttonColors(
-                        containerColor = colorResource(R.color.purple_200),
-                        contentColor = Color.DarkGray
-                    )
-                ) {
-                    Text(
-                        text = "登入"
-                    )
-                }
+
 
             }
         }
+        SnackbarHost(hostState = snackbarHostState)
     }
 }
+
 
 @Preview(showBackground = true)
 @Composable
