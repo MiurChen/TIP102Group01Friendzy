@@ -1,10 +1,16 @@
 <resources>
     <string name="app_name">TIP102Group01Friendzy</string>
-    <string name="Account">Account(email)</string>
-    <string name="Password">Password</string>
-    <string name="SetUp">Set up</string>
-    <string name="LogIn">Log in</string>
+    <string name="account">Account(email)</string>
+    <string name="password">Password</string>
+    <string name="setUp">Set up</string>
+    <string name="logIn">Log in</string>
     <string name="ForgotYourPassword">Forgot Your Password?</string>
     <string name="acc_pass_empty">Account and password cannot be empty!</string>
+    <string name="name">Name</string>
+    <string name="phone">Phone</string>
+    <string name="email">Email</string>
+    <string name="submit">Submit</string>
+    <string name="sendLink">sendlink</string>
+    <string name="confirmPassword">confirmPassword</string>
 
 </resources>

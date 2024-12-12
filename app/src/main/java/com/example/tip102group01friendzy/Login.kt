@@ -81,12 +81,13 @@ fun Login() {
             TextField(
                 value = account,
                 onValueChange = { account = it },
-                label = { Text(text = stringResource(R.string.Account)) },
+                label = { Text(text = stringResource(R.string.account)) },
                 singleLine = true,
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = colorResource(R.color.teal_700),
                     unfocusedIndicatorColor = colorResource(R.color.purple_200)
                 ),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(12.dp)
@@ -95,7 +96,7 @@ fun Login() {
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                label = { Text(text = stringResource(R.string.Password)) },
+                label = { Text(text = stringResource(R.string.password)) },
                 leadingIcon = {
                     Icon(
                         imageVector = Icons.Default.Lock,
@@ -147,7 +148,7 @@ fun Login() {
                 )
             ) {
                 Text(
-                    text = stringResource(R.string.LogIn)
+                    text = stringResource(R.string.logIn)
                 )
             }
             Row(
@@ -169,7 +170,7 @@ fun Login() {
                     onClick = { } //跳轉畫面到註冊
                 ) {
                     Text(
-                        text = stringResource(R.string.SetUp),
+                        text = stringResource(R.string.setUp),
                         color = colorResource(R.color.Gray)
                     )
                 }

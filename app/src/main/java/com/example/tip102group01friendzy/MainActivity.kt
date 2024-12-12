@@ -51,21 +51,16 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             TIP102Group01FriendzyTheme {
-                Main()
+                Register()
             }
         }
     }
-}
-
-@Composable
-fun Main() {
-
 }
 
 @Preview(showBackground = true)
 @Composable
 fun MainPreview() {
     TIP102Group01FriendzyTheme {
-        Main()
+//        Main()
     }
 }
