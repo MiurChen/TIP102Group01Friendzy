@@ -87,7 +87,7 @@ fun Login() {
                     focusedIndicatorColor = colorResource(R.color.teal_700),
                     unfocusedIndicatorColor = colorResource(R.color.purple_200)
                 ),
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
                     .padding(12.dp)

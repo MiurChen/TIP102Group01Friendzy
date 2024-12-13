@@ -12,4 +12,9 @@
     <string name="email">電子信箱</string>
     <string name="submit">送出</string>
     <string name="sendLink">請輸入您的電子信箱，我們將會傳送連結給您。</string>
+    <string name="confirmPassword">確認密碼</string>
+    <string name="columnIsEmpty">欄位不可為空!</string>
+    <string name="passwordRule">密碼長度應至少8 碼以上!</string>
+    <string name="errorEmail">信箱格式錯誤!</string>
+    <string name="passwordDifferent">兩次輸入的密碼不相同!</string>
 </resources>

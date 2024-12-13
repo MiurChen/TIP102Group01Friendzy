@@ -10,7 +10,11 @@
     <string name="phone">Phone</string>
     <string name="email">Email</string>
     <string name="submit">Submit</string>
-    <string name="sendLink">sendlink</string>
-    <string name="confirmPassword">confirmPassword</string>
+    <string name="sendLink">Please enter your email address and we will send you the link.</string>
+    <string name="columnIsEmpty">Field cannot be empty.</string>
+    <string name="passwordRule">Password(at least 8 characters)</string>
+    <string name="errorEmail">Email Formatting Error.</string>
+    <string name="passwordDifferent">Password do not match.</string>
+    <string name="confirmPassword">Confirm Password</string>
 
 </resources>

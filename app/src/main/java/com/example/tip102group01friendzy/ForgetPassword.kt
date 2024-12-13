@@ -94,7 +94,7 @@ fun ForgetPassword() {
                     )
                 },
                 singleLine = true,
-                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Password),
+                keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 colors = TextFieldDefaults.colors(
                     focusedIndicatorColor = colorResource(R.color.teal_700),
                     unfocusedIndicatorColor = colorResource(R.color.purple_200)
