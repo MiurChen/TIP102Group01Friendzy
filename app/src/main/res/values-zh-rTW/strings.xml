@@ -17,4 +17,9 @@
     <string name="passwordRule">密碼長度應至少8 碼以上!</string>
     <string name="errorEmail">信箱格式錯誤!</string>
     <string name="passwordDifferent">兩次輸入的密碼不相同!</string>
+    <string name="Login">Login</string>
+    <string name="Register">註冊</string>
+    <string name="ForgetPassword">忘記密碼</string>
+    <string name="back_button">BackButton</string>
+    <string name="EmailCanNotEmpty">信箱不可以為空</string>
 </resources>

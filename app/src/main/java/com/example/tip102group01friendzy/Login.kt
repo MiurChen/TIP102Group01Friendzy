@@ -1,5 +1,6 @@
 package com.example.tip102group01friendzy
 
+import android.util.Patterns
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.border
@@ -44,16 +45,23 @@ import androidx.compose.ui.text.input.KeyboardType
 import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.tip102group01friendzy.ui.theme.TIP102Group01FriendzyTheme
 import kotlinx.coroutines.launch
 
 @Composable
-fun Login() {
+fun Login(
+    navController: NavHostController
+) {
     val context = LocalContext.current
     var account by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
+    val emailRegex = Patterns.EMAIL_ADDRESS
+    val isValidEmail = emailRegex.matcher(account).matches()
+    val emailShowError = account.isNotEmpty() && !isValidEmail
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -87,6 +95,7 @@ fun Login() {
                     focusedIndicatorColor = colorResource(R.color.teal_700),
                     unfocusedIndicatorColor = colorResource(R.color.purple_200)
                 ),
+                isError = emailShowError,
                 keyboardOptions = KeyboardOptions(keyboardType = KeyboardType.Email),
                 modifier = Modifier
                     .fillMaxWidth(0.9f)
@@ -141,7 +150,7 @@ fun Login() {
                             )
                         }
                     }
-                },//帳號密碼正確進入主畫面、帳號密碼錯誤不可登入
+                },//else if帳號或密碼錯誤跳錯誤訊息，else 進入主畫面
                 colors = ButtonDefaults.buttonColors(
                     containerColor = colorResource(R.color.purple_200),
                     contentColor = Color.DarkGray
@@ -158,7 +167,10 @@ fun Login() {
                     .fillMaxWidth()
             ) {
                 TextButton(
-                    onClick = { password = "" } //跳轉畫面到忘記密碼頁
+                    onClick = {
+                        password = ""
+                        navController.navigate(Screen.ForgetPassword.name)
+                    } //跳轉畫面到忘記密碼頁
                 ) {
                     Text(
                         text = stringResource(R.string.ForgotYourPassword),
@@ -167,7 +179,9 @@ fun Login() {
                 }
 //                VerticalDivider(color = colorResource(R.color.Gray))
                 TextButton(
-                    onClick = { } //跳轉畫面到註冊
+                    onClick = {
+                        navController.navigate(Screen.Register.name)
+                    } //跳轉畫面到註冊
                 ) {
                     Text(
                         text = stringResource(R.string.setUp),
@@ -187,6 +201,6 @@ fun Login() {
 @Composable
 fun LoginPreview() {
     TIP102Group01FriendzyTheme {
-        Login()
+        Login(rememberNavController())
     }
 }

@@ -1,10 +1,6 @@
 package com.example.tip102group01friendzy
 
-import android.os.Bundle
 import android.util.Patterns
-import androidx.activity.ComponentActivity
-import androidx.activity.compose.setContent
-import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -19,7 +15,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowBack
 import androidx.compose.material.icons.filled.Clear
 import androidx.compose.material.icons.filled.Edit
 import androidx.compose.material.icons.filled.Favorite
@@ -55,24 +50,16 @@ import androidx.compose.ui.text.input.PasswordVisualTransformation
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.navigation.NavHostController
+import androidx.navigation.compose.rememberNavController
 import com.example.tip102group01friendzy.ui.theme.TIP102Group01FriendzyTheme
 import kotlinx.coroutines.launch
 
-class RegisterActivity : ComponentActivity() {
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContent {
-            TIP102Group01FriendzyTheme {
-                Register()
-            }
-        }
-    }
-}
-
 //@OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun Register() {
+fun Register(
+    navController: NavHostController
+) {
     val context = LocalContext.current
     var account by remember { mutableStateOf("") }
     var password by remember { mutableStateOf("") }
@@ -84,62 +71,31 @@ fun Register() {
     val emailRegex = Patterns.EMAIL_ADDRESS
     val isValidEmail = emailRegex.matcher(account).matches()
     val emailShowError = account.isNotEmpty() && !isValidEmail
-    val passwordShowError = password.count() < 8 && password.isNotEmpty()
+    val passwordShowError = password.count() < 8
 
 
     Column(
         verticalArrangement = Arrangement.Top,
-        horizontalAlignment = Alignment.Start,
+        horizontalAlignment = Alignment.CenterHorizontally,
         modifier = Modifier
             .fillMaxSize()
-            .padding(15.dp, 40.dp)
+            .padding(12.dp, 40.dp)
     ) {
         Column(
+            horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
                 .padding(6.dp)
         ) {
-            Row(
+            Text(
+                text = stringResource(R.string.setUp),
+                fontSize = 20.sp,
                 modifier = Modifier
-                    .fillMaxWidth()
-            ) {
-                Column(
-                    verticalArrangement = Arrangement.Center,
-                    horizontalAlignment = Alignment.Start,
-                    modifier = Modifier
-                        .fillMaxWidth(0.35f)
-                ) {
-                    Icon(
-                        imageVector = Icons.AutoMirrored.Filled.ArrowBack,
-                        contentDescription = "Back",
-                        modifier = Modifier
-                            .clickable { } //回到登入頁
-                    )
-                }
-                Column(
-                    horizontalAlignment = Alignment.CenterHorizontally,
-                    verticalArrangement = Arrangement.Center,
-                    modifier = Modifier
-                        .fillMaxWidth(0.5f)
-                ) {
-                    Text(
-                        text = stringResource(R.string.setUp),
-                        fontSize = 20.sp,
-                        modifier = Modifier
-                            .padding(6.dp)
-                    )
-                }
-            }
+                    .padding(6.dp)
+            )
         }
-    }
 
-    Column(
-        verticalArrangement = Arrangement.Center,
-        horizontalAlignment = Alignment.CenterHorizontally,
-        modifier = Modifier
-            .fillMaxWidth()
-            .padding(vertical = 200.dp)
-    ) {
+
         OutlinedTextField(
             value = account,
             onValueChange = { account = it },
@@ -160,13 +116,13 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp,12.dp)
+                .padding(18.dp, 12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
             value = password,
             onValueChange = { password = it },
-            placeholder = { Text(text = stringResource(R.string.passwordRule)) },
+            placeholder = { Text(text = stringResource(R.string.password)) },
             leadingIcon = {
                 Icon(
                     imageVector = Icons.Default.Lock,
@@ -191,10 +147,10 @@ fun Register() {
                 focusedIndicatorColor = colorResource(R.color.teal_700),
                 unfocusedIndicatorColor = colorResource(R.color.purple_200),
                 errorIndicatorColor = Color.Red
-                ),
+            ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp,12.dp)
+                .padding(18.dp, 12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
@@ -225,7 +181,7 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp,12.dp)
+                .padding(18.dp, 12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
@@ -246,7 +202,7 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(18.dp,12.dp)
+                .padding(18.dp, 12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         Row(
@@ -254,7 +210,7 @@ fun Register() {
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(10.dp,8.dp)
+                .padding(10.dp, 8.dp)
         ) {
             Box(
                 contentAlignment = Alignment.TopStart,
@@ -305,7 +261,7 @@ fun Register() {
         }
         Button(
             onClick = {
-                if(passwordShowError){
+                if (passwordShowError) {
                     scope.launch {
                         snackbarHostState.showSnackbar(
                             message = context.getString(R.string.passwordRule),
@@ -333,6 +289,8 @@ fun Register() {
                             withDismissAction = true
                         )
                     }
+                }else{
+                navController.navigate(Screen.Login.name)
                 }
             },//1.格線都輸入且符合規格回到登入頁
             // 2.密碼確認沒問題回到登入頁
@@ -401,6 +359,6 @@ fun SwitchWithText(
 @Composable
 fun RegisterPreview() {
     TIP102Group01FriendzyTheme {
-        Register()
+        Register(rememberNavController())
     }
 }
