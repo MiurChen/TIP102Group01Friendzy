@@ -92,11 +92,12 @@ fun Register() {
         horizontalAlignment = Alignment.Start,
         modifier = Modifier
             .fillMaxSize()
-            .padding(12.dp, 40.dp)
+            .padding(15.dp, 40.dp)
     ) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
+                .padding(6.dp)
         ) {
             Row(
                 modifier = Modifier
@@ -159,7 +160,7 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(18.dp,12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
@@ -193,7 +194,7 @@ fun Register() {
                 ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(18.dp,12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
@@ -224,7 +225,7 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(18.dp,12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         OutlinedTextField(
@@ -245,7 +246,7 @@ fun Register() {
             ),
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(12.dp)
+                .padding(18.dp,12.dp)
                 .background(colorResource(R.color.purple_200))
         )
         Row(
@@ -253,7 +254,7 @@ fun Register() {
             horizontalArrangement = Arrangement.Start,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(10.dp,8.dp)
         ) {
             Box(
                 contentAlignment = Alignment.TopStart,
@@ -387,10 +388,10 @@ fun SwitchWithText(
             null
         },
         colors = SwitchDefaults.colors(
-            checkedThumbColor = colorResource(R.color.yellow_100),
-            checkedTrackColor = colorResource(R.color.orange_200),
-            uncheckedThumbColor = colorResource(R.color.purple_500),
-            uncheckedTrackColor = colorResource(R.color.orange_200)
+            checkedThumbColor = colorResource(R.color.pink_200),
+            checkedTrackColor = colorResource(R.color.green_200),
+            uncheckedThumbColor = colorResource(R.color.blue_700),
+            uncheckedTrackColor = colorResource(R.color.green_200)
         )
     )
 }

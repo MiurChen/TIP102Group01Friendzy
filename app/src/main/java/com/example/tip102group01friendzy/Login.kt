@@ -67,7 +67,7 @@ fun Login() {
             horizontalAlignment = Alignment.CenterHorizontally,
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(8.dp)
+                .padding(6.dp)
         ) {
             Image(
                 painter = painterResource(R.drawable.friendzy),
