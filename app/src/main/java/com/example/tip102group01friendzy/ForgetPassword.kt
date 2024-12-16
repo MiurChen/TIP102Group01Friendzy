@@ -53,7 +53,7 @@ fun ForgetPassword(
     val scope = rememberCoroutineScope()
     val emailRegex = Patterns.EMAIL_ADDRESS
     val isValidEmail = emailRegex.matcher(email).matches()
-    val emailShowError = email.isNotEmpty() && !isValidEmail
+    val emailShowError = email.isBlank() && !isValidEmail
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -108,7 +108,7 @@ fun ForgetPassword(
 
             Button(
                 onClick = {
-                    if (email.isEmpty()) {
+                    if (email.isBlank()) {
                         scope.launch {
                             snackbarHostState.showSnackbar(
                                 message = context.getString(R.string.EmailCanNotEmpty),

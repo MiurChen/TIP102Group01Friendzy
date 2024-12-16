@@ -70,8 +70,8 @@ fun Register(
     val scope = rememberCoroutineScope()
     val emailRegex = Patterns.EMAIL_ADDRESS
     val isValidEmail = emailRegex.matcher(account).matches()
-    val emailShowError = account.isNotEmpty() && !isValidEmail
-    val passwordShowError = password.count() < 8
+    val emailShowError = account.isNotBlank() && !isValidEmail
+    val passwordShowError = password.count() < 8 && password.isNotBlank()
 
 
     Column(
@@ -243,8 +243,6 @@ fun Register(
                 modifier = Modifier
                     .padding(8.dp)
                     .clip(RoundedCornerShape(8.dp))
-
-
             )
             SwitchWithText(status) {
                 status = it
@@ -282,7 +280,7 @@ fun Register(
                             withDismissAction = true
                         )
                     }
-                } else if (account.isEmpty() || password.isEmpty() || confirmPassword.isEmpty() || username.isEmpty()) {
+                } else if (account.isBlank() || password.isBlank() || confirmPassword.isBlank() || username.isBlank()) {
                     scope.launch {
                         snackbarHostState.showSnackbar(
                             message = context.getString(R.string.columnIsEmpty),

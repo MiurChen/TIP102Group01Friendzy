@@ -61,7 +61,7 @@ fun Login(
     val scope = rememberCoroutineScope()
     val emailRegex = Patterns.EMAIL_ADDRESS
     val isValidEmail = emailRegex.matcher(account).matches()
-    val emailShowError = account.isNotEmpty() && !isValidEmail
+    val emailShowError = account.isNotBlank() && !isValidEmail
 
     Column(
         verticalArrangement = Arrangement.Center,
@@ -142,7 +142,7 @@ fun Login(
 
             Button(
                 onClick = {
-                    if (account.isEmpty() || password.isEmpty()) {
+                    if (account.isBlank() || password.isBlank()) {
                         scope.launch {
                             snackbarHostState.showSnackbar(
                                 message = context.getString(R.string.acc_pass_empty),
